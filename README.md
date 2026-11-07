@@ -1,10 +1,12 @@
 # L04 · RAGAS Diagnostic Report — PayPilot
-Набір із ДЗ_2: [<посилання на репозиторій ДЗ_2>](https://github.com/polinanana/paypilot-l03-eval)
+Набір із ДЗ_2: https://github.com/polinanana/paypilot-l03-eval
 
 ## Запуск
 Покладіть `golden.jsonl` у `~/paypilot/l03/sets/` і виконайте:
 
     docker compose run --rm eval --set golden --profile clean
+
+docker compose run --rm eval --set golden --profile lesson-04
 
 `set_hash`: e95119a83b54
 
@@ -27,10 +29,13 @@
 ## Прогони
 | Прогін | Профіль | Результат | Звіт |
 | --- | --- | --- | --- |
-| Baseline | `clean` | 39/39 passed | reports/golden-clean-20261107T131940.json |
-| Профіль заняття | `lesson-04` | <N/M> | `reports/…` |
+| Baseline | `clean` | 39/39 | reports/golden-clean-20261107T131940.json |
+| Профіль заняття | `lesson-04` | 28/39 | reports/golden-lesson-04-20261107T133848.json |
 
 
 Прогноз до прогону `lesson-04`: Впаде R-05 бо рядок буде розрізаний. 
-Коміт із прогнозом: `<hash>`
-Що впало: <id>. Розбіжність із прогнозом: <чим пояснюється або «немає»>
+Коміт із прогнозом: 0573cb7
+
+Що впало: R-01, R-02, R-03, R-05, R-06, R-07, R-08, R-10, . 
+
+Розбіжність із прогнозом: R-01, R-06, R-08, R-10 (з top_k=4 правильний фрагмент був би в списку, а з top_k=1 потрапляє лише перший); R-02, R-03, R-05 (розділ порізаний на шматки, і агенту дістався не той, а top_k=1); R-07 - агент не шукав
